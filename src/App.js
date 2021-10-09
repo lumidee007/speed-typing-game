@@ -2,7 +2,7 @@ import { useState, useEffect, useRef} from "react"
 
 export default function App() {
 
-  const STARTING_TIME = 4
+  const STARTING_TIME = 10
   const [text, setText] = useState("")
   const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
