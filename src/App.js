@@ -1,17 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect} from "react"
 
 export default function App() {
 
-  const [text, setText] = useState(9)
+  const [text, setText] = useState("")
+  const [timeRemaining, setTimeRemaining] = useState(5)
 
   const handleChange = (e) => {
     setText(e.target.value)
   }
 
-  const wordCount = (text) => {
-    const wordsArr = text.trim().split(" ")
+  const wordCount = (txt) => {
+    let wordsArr = txt.trim().split(" ")
     return wordsArr.filter(word => word !== "").length
   }
+
+  useEffect(() => {
+    if(timeRemaining > 0) {
+        setTimeout(() => {
+            setTimeRemaining(time => time - 1)
+        }, 1000)
+    }
+}, [timeRemaining])
+
+
 
   return (
     <div>
@@ -20,7 +31,7 @@ export default function App() {
       value={text}
       onChange={handleChange}
       />
-            <h4>Time remaining: ???</h4>
+            <h4>Time remaining: {timeRemaining}</h4>
             <button onClick={() => console.log(wordCount(text))}>
                 Start
             </button >
