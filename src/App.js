@@ -8,6 +8,11 @@ export default function App() {
     setText(e.target.value)
   }
 
+  const wordCount = (text) => {
+    const wordsArr = text.trim().split(" ")
+    return wordsArr.filter(word => word !== "").length
+  }
+
   return (
     <div>
       <h1>Speed typing game</h1>
@@ -16,9 +21,9 @@ export default function App() {
       onChange={handleChange}
       />
             <h4>Time remaining: ???</h4>
-            <button >
+            <button onClick={() => console.log(wordCount(text))}>
                 Start
-            </button>
+            </button >
             <h2>Word count : {text}</h2>
 
     </div>
