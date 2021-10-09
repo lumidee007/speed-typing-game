@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect, useRef} from "react"
 
 export default function App() {
 
@@ -7,6 +7,7 @@ export default function App() {
   const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME)
   const [isTimeRunning, setIsTimeRunning] = useState(false)
   const [wordCount, setWordCount] = useState(0)
+  const textBoxRef = useRef(null)
 
   const handleChange = (e) => {
     setText(e.target.value)
@@ -15,8 +16,6 @@ export default function App() {
   const calculateWordCount = (txt) => {
     let wordsArr = txt.trim().split(" ")
     return wordsArr.filter(word => word !== "").length
-
-
   }
 
   // Start game
@@ -24,6 +23,8 @@ export default function App() {
     setIsTimeRunning(true)
     setTimeRemaining(STARTING_TIME)
     setText("")
+    textBoxRef.current.disabled = false
+    textBoxRef.current.focus()
     setWordCount(0)
 }
 //End game
@@ -31,7 +32,6 @@ function endGame() {
     setIsTimeRunning(false)
     setWordCount(calculateWordCount(text))
 }
-
 
 
   useEffect(() => {
@@ -53,6 +53,7 @@ function endGame() {
       value={text}
       onChange={handleChange}
       disabled={!isTimeRunning}
+      ref={textBoxRef}
       />
             <h4>Time remaining: {timeRemaining}</h4>
             <button 
